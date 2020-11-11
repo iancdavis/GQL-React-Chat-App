@@ -37,7 +37,7 @@ mutation ($user:String!, $content:String!){
 //Component to display messages
 const Messages = ({ user }) => {
     const { data } = useSubscription(GET_MESSAGES, {
-        /* pollInterval: 500, */
+        /* pollInterval: 500, */ //replaced with subscriptions
     })
     if (!data) {
         return null
@@ -94,6 +94,8 @@ const Chat = () => {
         content: '',
     })
     const [postMessage] = useMutation(POST_MESSAGE)
+
+    // handles chat submission and resets ui state
     const onSend = () => {
         if (state.content.length > 0) {
             postMessage({

@@ -24,6 +24,7 @@ const typeDefs = `
     }
 `
 
+//persistent list of subscribers on channels
 const subscribers = []
 const onMessagesUpdates = (fn) => subscribers.push(fn)
 
@@ -56,7 +57,9 @@ const resolvers = {
     }
 }
 
+// Publish Subscribe handler for GQL yoga
 const pubsub = new PubSub()
+
 const server = new GraphQLServer({ typeDefs, resolvers, context: {pubsub} })
 server.start(({port}) => {
     console.log(`Server on http://localhost:${port}/`)
