@@ -9,6 +9,7 @@ import "./index.css";
 
 import Chat from 'chat/Chat'
 
+//this app is consuming the chat component from the client directory via module federation
 const App = () => (
     <Container>
         <p>

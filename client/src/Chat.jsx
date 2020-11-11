@@ -4,6 +4,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, useSubscription, useMutati
 import { WebSocketLink } from '@apollo/client/link/ws'
 import {Container, Row, Col, FormInput, Button} from "shards-react"
 
+//from apollo client docs pased in as option to client
 const link = new WebSocketLink({
     uri: `ws://localhost:4000/`,
     options: {
