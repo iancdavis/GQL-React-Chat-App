@@ -11,12 +11,15 @@ const link = new WebSocketLink({
     }
   })
 
+//Boilerplate from apollo client docs with uri changed to point at our gql server
 const client = new ApolloClient({
     link,
     uri: 'http://localhost:4000/',
     cache: new InMemoryCache()
 })
 
+
+//GraphQL Query strings
 const GET_MESSAGES = gql`
 subscription {
     messages {
@@ -31,6 +34,7 @@ mutation ($user:String!, $content:String!){
     postMessage(user: $user, content: $content)
 }`
 
+//Component to display messages
 const Messages = ({ user }) => {
     const { data } = useSubscription(GET_MESSAGES, {
         /* pollInterval: 500, */
@@ -40,6 +44,7 @@ const Messages = ({ user }) => {
     }
 
     return (
+        //map through messages and style them based on current user vs other users
         <>
             {data.messages.map(({ id, content, user: messageUser}) => (
                 <div
@@ -82,6 +87,7 @@ const Messages = ({ user }) => {
     )
 }
 
+//chat component provieds form inputs and handles state
 const Chat = () => {
     const [state, stateSet] = React.useState({
         user: 'Ian',
@@ -136,6 +142,7 @@ const Chat = () => {
     )
 }
 
+// Apollo provider shares state down the tree, similar to Redux
 export default () => (
     <ApolloProvider client={client}>
         <Chat />

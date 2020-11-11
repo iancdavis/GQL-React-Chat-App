@@ -1,7 +1,9 @@
 const {GraphQLServer, PubSub} = require('graphql-yoga')
 
+//empty array to store data from gql queries
 const messages = []
 
+//Describe graphql schema
 const typeDefs = `
     type Message {
         id: ID!
@@ -25,6 +27,7 @@ const typeDefs = `
 const subscribers = []
 const onMessagesUpdates = (fn) => subscribers.push(fn)
 
+//resolvers that correspond to every typedef
 const resolvers = {
     Query: {
         messages: () => messages,
